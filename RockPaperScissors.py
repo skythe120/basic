@@ -6,7 +6,7 @@ def PlayerSelect():
     Pchk = 0;
     
     while(Pchk < 1):
-        GetPChoice = input("[R]ock - [P]apper - [S]cissors! ");
+        GetPChoice = input("[R]ock - [P]aper - [S]cissors! ");
         if(GetPChoice == "R" or GetPChoice == "ROCK" or GetPChoice == "rock" or GetPChoice == "r"):
             GetPChoice = "Rock"
             Pchk = 1;
