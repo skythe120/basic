@@ -47,25 +47,29 @@ while(puzzlelength < 3):
     except ValueError:
         print("invalid entry")
         puzzlelength = 0
-        
+print(goalword)      
 
 print("\n")
 tries = 7
 while True:
-    print("Puzzle: ")
+    print(f"Puzzle: Tries left - {tries}")
     print(puzzle)
     playerguess = input("Pick a Letter: ")
     playerguess = lettercheck(playerguess)
     print("Guessed letters")
     print(guessed)
     print("\n")
-    x = 0
-    for i in goalword:
-        if(playerguess == goalword[x]):
-            puzzle[x] = playerguess;
-        x = x + 1
+    if(playerguess in goalword):
+        x = goalword.index(playerguess)
+        puzzle[x] = playerguess
+    else:
+        tries = tries - 1
+   
     if(goalword == puzzle):
         print (goalword)
         print("you win!!!!!");
+        break
+    elif(tries < 1):
+        print("Sorry you lost")
         break
             
