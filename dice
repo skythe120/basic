@@ -1,0 +1,62 @@
+import tkinter as tk
+from tkinter.ttk import Combobox
+from tkinter import *
+import random
+
+form=tk.Tk()
+form.title("Pi Theorem")
+form.geometry("300x300")
+
+
+def Add():
+    textbox.delete(0, END)
+    dice = combobox.get()
+    dice = int(dice) + 1
+    dnum = dbox.get()
+    try:
+        dnum = int(dnum)
+        if(dnum < 1):
+            dnum = 1
+    except:
+        dnum = int(1)
+    if(dice != ""):
+        i = 0
+        final = []
+        while(i < dnum):
+            rollme = random.randrange(1, dice)
+            final.append(rollme)
+            i = i + 1
+    
+    
+        textbox.insert(1, final) 
+    else:
+        textbox.insert(1, "Error")
+        
+    
+        
+
+#buton
+buton=tk.Button(form,text='roll',fg='black',command=Add)
+
+buton.place(x=220,y=50,height=40, width=40)
+
+#entry - textbox
+textbox=tk.Entry(fg='black',bg='light blue')
+textbox.pack(ipady=10)
+textbox.place(width=200,height=100,x=40,y=150)
+
+#combobox 
+label=tk.Label(form, text = "Dice: ")
+label.pack()
+label.place(width=30,height=20,x=10,y=50)
+d = [4, 6, 8, 10, 12, 20, 100]
+combobox=Combobox(form, values=d ,height=3)
+combobox.pack()
+combobox.place(width=150,height=20,x=40,y=50)
+
+#dice number - textbox
+dbox=tk.Entry(fg='black',bg='white')
+dbox.pack(ipady=10)
+dbox.place(width=150,height=20,x=40,y=80)
+
+form.mainloop()
