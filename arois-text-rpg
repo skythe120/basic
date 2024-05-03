@@ -1,0 +1,72 @@
+import csv
+import os
+import re
+
+clevel = 0
+save_type = ".csv"
+
+def newgame():
+    while True:
+        name = input("Please Enter a name for your new tale: ")
+        pattern = r'^[a-zA-Z_]+$'
+        if re.match(pattern, name):
+            print(f"Adventurer {name} your adventure begins now!")
+            newgame = name + save_type
+            data = [
+            [1, 0, 0]
+            ]
+        
+            with open(newgame, 'w', newline='') as csvfile:
+                csv_writer = csv.writer(csvfile)
+                for row in data:
+                    csv_writer.writerow(row)
+        
+            clevel = 1
+            return clevel
+        else:
+            print(f"I'm Sorry {name} My magic can't accept numbers and special characters to begin try only using Letters .")
+
+
+def checksavedgame():
+    while True:
+        saved_name = input("Enter your name and I will find your story! ")
+        findname = saved_name + save_type
+        if os.path.exists(findname):
+            print(f"hazah! {saved_name} I have found your tale!")
+            return saved_name
+        else:
+            print("I could not find your tale try again")
+            
+def loadsavedgame(saved_name):
+    file_path = saved_name + save_type
+    gameinfo = []
+    with open(file_path, 'r', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            gameinfo.append(row)
+        gameinfo = gameinfo[0]
+    return gameinfo
+            
+            
+
+
+while True:
+    if(clevel ==0):
+        print("welcome to Arois! \n")
+        gtype = input("Is this a [new] or [saved] tale? ")
+        if(gtype == "new"):
+            clevel = newgame()
+        elif(gtype == "saved"):
+            saved_name = checksavedgame()
+            gameinfo = loadsavedgame(saved_name)
+            clevel = int(gameinfo[0])
+        else:
+            print("Whoops I didn't hear you try again. ")
+    
+    
+    elif(clevel == 1):
+        print("\n \n \n")
+        print("level 1 base")
+    elif(clevel == 2):
+        print("level 2 base")
+  
